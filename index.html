@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torn Bounty Assist</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Torn Bounty Assist</h1>
+            <p>Efficiently manage and prioritize your bounty targets</p>
+        </header>
+
+        <!-- Interface 1: Upload Documents -->
+        <div id="upload-interface" class="interface active">
+            <div class="card">
+                <h2>📁 Upload Bounty List</h2>
+                
+                <!-- Terms and Conditions -->
+                <div class="terms-section">
+                    <details class="terms-dropdown">
+                        <summary>📋 Terms and Conditions (Click to view)</summary>
+                        <div class="terms-content">
+                            <ul>
+                                <li>This app is purely to assist in bounty collection.</li>
+                                <li>The user is responsible for any abuse of this app.</li>
+                            </ul>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="terms-agree" required>
+                                <span class="checkmark"></span>
+                                I agree to the terms and conditions
+                            </label>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- File Upload -->
+                <div class="upload-section">
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">📤</div>
+                        <p>Drop your XLSX file here or click to browse</p>
+                        <input type="file" id="file-input" accept=".xlsx,.xls" hidden>
+                        <button id="browse-btn" class="btn-secondary" disabled>Browse Files</button>
+                    </div>
+                    <div class="file-info" id="file-info" style="display: none;">
+                        <p id="file-name"></p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <button id="process-btn" class="btn-primary">Process File</button>
+                    </div>
+                </div>
+
+                <div class="status-message" id="status-message"></div>
+            </div>
+        </div>
+
+        <!-- Interface 2: Dashboard -->
+        <div id="dashboard-interface" class="interface">
+            <div class="card">
+                <h2>🎮 Bounty Dashboard</h2>
+                
+                <div class="controls">
+                    <div class="input-group">
+                        <label for="user-level">Your Level (1-100):</label>
+                        <input type="number" id="user-level" min="1" max="100" placeholder="Enter your level">
+                    </div>
+                    <button id="get-targets-btn" class="btn-primary" disabled>Get Player Details</button>
+                </div>
+
+                <div id="results-section" style="display: none;">
+                    <div class="results-header">
+                        <h3>🎯 Recommended Targets</h3>
+                        <div class="results-info">
+                            <span id="current-result">1</span> of <span id="total-results">0</span>
+                        </div>
+                    </div>
+
+                    <div class="target-card">
+                        <table class="target-table">
+                            <thead>
+                                <tr>
+                                    <th>💰 Reward</th>
+                                    <th>👤 Name</th>
+                                    <th>📊 Level</th>
+                                    <th>📦 Quantity</th>
+                                    <th>🏥 Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="target-display">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="navigation">
+                        <button id="prev-btn" class="btn-secondary">← Back</button>
+                        <button id="next-btn" class="btn-secondary">Next →</button>
+                    </div>
+                </div>
+
+                <div id="error-message" class="error-message" style="display: none;"></div>
+            </div>
+
+            <div class="actions">
+                <button id="back-to-upload" class="btn-outline">🔄 Upload New File</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
